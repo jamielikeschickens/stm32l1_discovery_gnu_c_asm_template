@@ -6,7 +6,6 @@
 .extern main
 .global AsmStart  @ to C
 .global Lab_Start
-.extern __libc_init_array
 
 .equ AVALUE, 42 @ initial value to double
 
@@ -19,9 +18,6 @@
 
 .thumb_func
 Lab_Start:
-	@ Initialise C structures
-	BL __libc_init_array
-
 	LDR r0, =main
 	BLX r0  @ Branch to main() in C code
 

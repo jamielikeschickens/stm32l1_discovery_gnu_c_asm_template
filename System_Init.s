@@ -1,6 +1,4 @@
-.section .text	
-		
-@ #defines
+.section .text	@ #defines
 @ Clock enable register for the I/O Bus
 .equ RCC_AHBENR, 0x4002381c
 @ In/Out mode selection for GPIO ports
@@ -27,6 +25,7 @@
 .global GPIOB_ODR
 .global TIM2_CNT
 
+.extern __libc_init_array
 .extern Lab_Start
 
 @ This will be ThumbV1 code
@@ -89,6 +88,8 @@ Button_Wait:
 	B Init_End
 
 Init_End:
+	BL __libc_init_array
+
 	LDR r0, =Lab_Start
 	BX r0
 
